@@ -17,9 +17,9 @@ dht DHT;
 
 using namespace std;
 
-float Temperatura = 56;
-float Humedad = 59;
-float Luz = 87;
+float Temperatura;
+float Humedad;
+float Luz;
 
 void setup()
 {
@@ -76,9 +76,7 @@ void setup()
   
   pinMode(ledPin, OUTPUT);  
   
-  //leer_Temperatura_humedad();
-  //lectura_Luz();
-  send_Data(Temperatura, Humedad, Luz);
+  
 
 
   Serial.println();
@@ -87,7 +85,10 @@ void setup()
 void loop()
 {
   
-  
+  leer_Temperatura_humedad();
+  lectura_Luz();
+  send_Data(Temperatura, Humedad, Luz);
+  delay(100000);
 }
 
 
@@ -122,7 +123,7 @@ void send_Data(float temperatura, float humedad, float luz)
   
 
   String cmd2 = "AT+CIPSEND=4,";
-  cmd2 += cmd2.length;
+  cmd2 += cmd2.length();
   
   
   dbgSerial.println(cmd2);
